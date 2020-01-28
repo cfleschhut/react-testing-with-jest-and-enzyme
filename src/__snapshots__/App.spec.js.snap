@@ -3,7 +3,7 @@
 exports[`App snapshot renders 1`] = `
 <div>
   <h1>
-    Counter
+    Counter (using useState hook)
   </h1>
   <div>
     <p>
@@ -23,7 +23,7 @@ exports[`App snapshot renders 1`] = `
     Decrement
   </button>
   <h2>
-    Async Data
+    Async Data (using Axios and useEffect + useReducer hooks)
   </h2>
   <ul />
 </div>

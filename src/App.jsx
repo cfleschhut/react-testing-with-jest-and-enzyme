@@ -1,4 +1,5 @@
 import React, { useState, useReducer, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 const dataReducer = (state, action) => {
@@ -33,7 +34,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Counter</h1>
+      <h1>Counter (using useState hook)</h1>
       <Counter counter={counter} />
       <button type="button" onClick={() => setCounter(counter + 1)}>
         Increment
@@ -42,7 +43,7 @@ const App = () => {
         Decrement
       </button>
 
-      <h2>Async Data</h2>
+      <h2>Async Data (using Axios and useEffect + useReducer hooks)</h2>
       {data.error && <div className="error">Error</div>}
       <ul>
         {data.list.map(item => (
@@ -58,5 +59,9 @@ export const Counter = ({ counter }) => (
     <p>{counter}</p>
   </div>
 );
+
+Counter.propTypes = {
+  counter: PropTypes.number.isRequired,
+};
 
 export default App;
