@@ -2,7 +2,7 @@ import React, { useState, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-const dataReducer = (state, action) => {
+export const dataReducer = (state, action) => {
   if (action.type === 'SET_ERROR') {
     return { ...state, list: [], error: true };
   }
