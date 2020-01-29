@@ -48,6 +48,30 @@ describe('App', () => {
 
     expect(counterWrapper.find('p').text()).toEqual('0');
   });
+
+  it('increments the counter', () => {
+    const wrapper = mount(<App />);
+
+    wrapper
+      .find('button')
+      .at(0)
+      .simulate('click');
+
+    const counterWrapper = wrapper.find(Counter);
+    expect(counterWrapper.find('p').text()).toEqual('1');
+  });
+
+  it('decrements the counter', () => {
+    const wrapper = mount(<App />);
+
+    wrapper
+      .find('button')
+      .at(1)
+      .simulate('click');
+
+    const counterWrapper = wrapper.find(Counter);
+    expect(counterWrapper.find('p').text()).toEqual('-1');
+  });
 });
 
 describe('Counter', () => {
