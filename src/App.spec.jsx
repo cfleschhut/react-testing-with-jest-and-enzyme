@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
+import axios from 'axios';
 import App, { Counter, dataReducer } from './App';
 
 const list = ['a', 'b', 'c'];
@@ -71,6 +72,63 @@ describe('App', () => {
 
     const counterWrapper = wrapper.find(Counter);
     expect(counterWrapper.find('p').text()).toEqual('-1');
+  });
+
+  it('fetches async data', done => {
+    const promise = new Promise(resolve =>
+      setTimeout(
+        () =>
+          resolve({
+            data: {
+              hits: [
+                { objectID: '1', title: 'a' },
+                { objectID: '2', title: 'b' },
+              ],
+            },
+          }),
+        100,
+      ),
+    );
+
+    axios.get = jest.fn(() => promise);
+
+    const wrapper = mount(<App />);
+
+    expect(wrapper.find('li').length).toEqual(0);
+
+    promise.then(() => {
+      setImmediate(() => {
+        wrapper.update();
+        expect(wrapper.find('li').length).toEqual(2);
+
+        axios.get.mockClear();
+        done();
+      });
+    });
+  });
+
+  it('fetches async data but fails', done => {
+    const promise = new Promise((resolve, reject) =>
+      setTimeout(() => reject(new Error()), 100),
+    );
+
+    axios.get = jest.fn(() => promise);
+
+    const wrapper = mount(<App />);
+
+    expect(wrapper.find('li').length).toEqual(0);
+
+    promise.catch(() => {
+      setImmediate(() => {
+        wrapper.update();
+        expect(wrapper.find('li').length).toEqual(0);
+
+        expect(wrapper.find('.error').length).toEqual(1);
+
+        axios.get.mockClear();
+        done();
+      });
+    });
   });
 });
 
