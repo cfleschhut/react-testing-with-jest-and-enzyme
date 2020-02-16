@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
@@ -43,8 +43,10 @@ const App = () => {
   const [counter, setCounter] = useReducer(counterReducer, { count: 0 });
 
   useEffect(() => {
+    const apiUrl = 'http://hn.algolia.com/api/v1/search?query=react';
+
     axios
-      .get('http://hn.algolia.com/api/v1/search?query=react')
+      .get(apiUrl)
       .then(response => {
         dispatch({ type: 'SET_LIST', list: response.data.hits });
       })
@@ -82,7 +84,11 @@ export const Counter = ({ counter }) => (
 );
 
 Counter.propTypes = {
-  counter: PropTypes.number.isRequired,
+  counter: PropTypes.number,
+};
+
+Counter.defaultProps = {
+  counter: 0,
 };
 
 export default App;

@@ -6,7 +6,7 @@ import App, { Counter, dataReducer, counterReducer } from './App';
 
 const list = ['a', 'b', 'c'];
 
-describe('App', () => {
+xdescribe('App', () => {
   describe('Reducer', () => {
     it('should set a list', () => {
       const state = { list: [], error: null };
