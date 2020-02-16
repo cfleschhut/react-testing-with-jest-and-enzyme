@@ -1,3 +1,5 @@
+/* eslint-disable react/sort-comp */
+
 import React, { Component } from 'react';
 
 class Counter extends Component {
@@ -7,17 +9,14 @@ class Counter extends Component {
     this.state = { count: 0 };
   }
 
-  increment = () => {
+  makeIncrementer = amount => () =>
     this.setState(prevState => ({
-      count: prevState.count + 1,
+      count: prevState.count + amount,
     }));
-  };
 
-  decrement = () => {
-    this.setState(prevState => ({
-      count: prevState.count - 1,
-    }));
-  };
+  increment = this.makeIncrementer(1);
+
+  decrement = this.makeIncrementer(-1);
 
   render() {
     const { count } = this.state;
