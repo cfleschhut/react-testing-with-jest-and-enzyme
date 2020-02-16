@@ -3,7 +3,7 @@
 exports[`App snapshot renders 1`] = `
 <div>
   <h1>
-    Counter (using useState hook)
+    Counter (using useReducer hook)
   </h1>
   <div>
     <p>

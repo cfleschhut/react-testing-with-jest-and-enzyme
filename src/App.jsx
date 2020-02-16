@@ -4,12 +4,33 @@ import axios from 'axios';
 
 export const dataReducer = (state, action) => {
   if (action.type === 'SET_ERROR') {
-    return { ...state, list: [], error: true };
+    return {
+      ...state,
+      list: [],
+      error: true,
+    };
   }
   if (action.type === 'SET_LIST') {
-    return { ...state, list: action.list, error: null };
+    return {
+      ...state,
+      list: action.list,
+      error: null,
+    };
   }
   throw new Error();
+};
+
+export const counterReducer = (state, action) => {
+  switch (action.type) {
+    case 'INCREASE':
+      return { ...state, count: state.count + 1 };
+
+    case 'DECREASE':
+      return { ...state, count: state.count - 1 };
+
+    default:
+      return state;
+  }
 };
 
 const initialData = {
@@ -18,8 +39,8 @@ const initialData = {
 };
 
 const App = () => {
-  const [counter, setCounter] = useState(0);
   const [data, dispatch] = useReducer(dataReducer, initialData);
+  const [counter, setCounter] = useReducer(counterReducer, { count: 0 });
 
   useEffect(() => {
     axios
@@ -34,12 +55,12 @@ const App = () => {
 
   return (
     <div>
-      <h1>Counter (using useState hook)</h1>
-      <Counter counter={counter} />
-      <button type="button" onClick={() => setCounter(counter + 1)}>
+      <h1>Counter (using useReducer hook)</h1>
+      <Counter counter={counter.count} />
+      <button type="button" onClick={() => setCounter({ type: 'INCREASE' })}>
         Increment
       </button>
-      <button type="button" onClick={() => setCounter(counter - 1)}>
+      <button type="button" onClick={() => setCounter({ type: 'DECREASE' })}>
         Decrement
       </button>
 

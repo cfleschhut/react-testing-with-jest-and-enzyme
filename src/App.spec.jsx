@@ -1,8 +1,8 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import renderer, { act } from 'react-test-renderer';
 import { mount } from 'enzyme';
 import axios from 'axios';
-import App, { Counter, dataReducer } from './App';
+import App, { Counter, dataReducer, counterReducer } from './App';
 
 const list = ['a', 'b', 'c'];
 
@@ -37,20 +37,20 @@ describe('App', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders the inner Counter', () => {
+  xit('renders the inner Counter', () => {
     const wrapper = mount(<App />);
 
     expect(wrapper.find(Counter).length).toEqual(1);
   });
 
-  it('passes all props to Counter', () => {
+  xit('passes all props to Counter', () => {
     const wrapper = mount(<App />);
     const counterWrapper = wrapper.find(Counter);
 
     expect(counterWrapper.find('p').text()).toEqual('0');
   });
 
-  it('increments the counter', () => {
+  xit('increments the counter', () => {
     const wrapper = mount(<App />);
 
     wrapper
@@ -62,7 +62,7 @@ describe('App', () => {
     expect(counterWrapper.find('p').text()).toEqual('1');
   });
 
-  it('decrements the counter', () => {
+  xit('decrements the counter', () => {
     const wrapper = mount(<App />);
 
     wrapper
@@ -74,7 +74,7 @@ describe('App', () => {
     expect(counterWrapper.find('p').text()).toEqual('-1');
   });
 
-  it('fetches async data', done => {
+  xit('fetches async data', done => {
     const promise = new Promise(resolve =>
       setTimeout(
         () =>
@@ -107,7 +107,7 @@ describe('App', () => {
     });
   });
 
-  it('fetches async data but fails', done => {
+  xit('fetches async data but fails', done => {
     const promise = new Promise((resolve, reject) =>
       setTimeout(() => reject(new Error()), 100),
     );
@@ -138,5 +138,18 @@ describe('Counter', () => {
     const tree = component.toJSON();
 
     expect(tree).toMatchSnapshot();
+  });
+
+  it('increments the counter state', () => {
+    const initialState = { count: 0 };
+    const action = { type: 'INCREASE' };
+
+    const result = counterReducer(initialState, action);
+
+    expect(result).toEqual({ count: 1 });
+    // expect(counterReducer(state, { type: 'DECREASE' })).toEqual({ count: -1 });
+    // expect(counterReducer(state, { type: 'UNMATCHING_ACTION' })).toEqual({
+    //   count: 0,
+    // });
   });
 });
