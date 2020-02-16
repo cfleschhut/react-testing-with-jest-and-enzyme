@@ -28,10 +28,10 @@ class Counter extends Component {
           <span>{count}</span>
         </p>
         <button type="button" onClick={this.increment} className="increment">
-          Increment
+          +++
         </button>
         <button type="button" onClick={this.decrement} className="decrement">
-          Decrement
+          ---
         </button>
 
         <hr />

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Counter component matches the snapshot 1`] = `
+<div>
+  <p>
+    Current count:
+    <span>
+      0
+    </span>
+  </p>
+  <button
+    className="increment"
+    onClick={[Function]}
+    type="button"
+  >
+    +++
+  </button>
+  <button
+    className="decrement"
+    onClick={[Function]}
+    type="button"
+  >
+    ---
+  </button>
+  <hr />
+</div>
+`;

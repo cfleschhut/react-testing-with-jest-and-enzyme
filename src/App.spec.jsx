@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer, { act } from 'react-test-renderer';
+import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import axios from 'axios';
 import App, { Counter, dataReducer, counterReducer } from './App';
