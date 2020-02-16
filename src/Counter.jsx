@@ -13,6 +13,12 @@ class Counter extends Component {
     }));
   };
 
+  decrement = () => {
+    this.setState(prevState => ({
+      count: prevState.count - 1,
+    }));
+  };
+
   render() {
     const { count } = this.state;
 
@@ -22,8 +28,11 @@ class Counter extends Component {
           Current count:
           <span>{count}</span>
         </p>
-        <button type="button" onClick={this.increment}>
+        <button type="button" onClick={this.increment} className="increment">
           Increment
+        </button>
+        <button type="button" onClick={this.decrement} className="decrement">
+          Decrement
         </button>
 
         <hr />
