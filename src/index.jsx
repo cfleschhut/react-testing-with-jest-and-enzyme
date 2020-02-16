@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import Counter from './Counter';
+import CounterList from './CounterList';
 
 ReactDOM.render(
   <div>
-    <Counter />
+    <CounterList />
     <App />
   </div>,
   document.getElementById('app'),
