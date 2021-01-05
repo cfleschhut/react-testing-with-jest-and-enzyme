@@ -42,7 +42,7 @@
     "webpack-dev-server": "^3.10.1"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.6.4",
     "dotenv": "^8.2.0",
     "node-fetch": "^2.6.0",
